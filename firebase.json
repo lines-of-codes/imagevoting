@@ -1,0 +1,8 @@
+{
+  "database": {
+    "rules": "realtime.database.rules.firebase.json"
+  },
+  "storage": {
+    "rules": "storage.firebase.rules"
+  }
+}
