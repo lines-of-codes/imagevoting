@@ -7,25 +7,26 @@
 
 <script lang="ts">
 	import Submission from "../components/Submission.svelte";
-	import "bootstrap-icons/font/bootstrap-icons.css";
+	import Header from "../components/Header.svelte";
+	import NotificationBox from "../components/NotificationBox.svelte";
+	import { onMount } from "svelte";
+	import { initializeFirebase } from "../firebase.ts";
+	import { notificationSystem } from "../stores.ts";
 
-	import { initializeApp } from "firebase/app";
-	import { getAnalytics } from "firebase/analytics";
-	// TODO: Add SDKs for Firebase products that you want to use
-	// https://firebase.google.com/docs/web/setup#available-libraries
+	let hasNotification: boolean = false;
+	let notificationContent: string = "";
 
-	const firebaseConfig = {
-		apiKey: "AIzaSyBOw2PK65VOtj4sC2ssRJbDyUfV2afT2G0",
-		authDomain: "imagevoting-linesofcodes.firebaseapp.com",
-		projectId: "imagevoting-linesofcodes",
-		storageBucket: "imagevoting-linesofcodes.appspot.com",
-		messagingSenderId: "822010908684",
-		appId: "1:822010908684:web:324d35d3ab16d8bdf5de29",
-		measurementId: "G-ZEMQFYM8RV"
-	};
+	function notify(content) {
+		notificationContent = content;
+		hasNotification = true;
+		setTimeout(() => {
+			hasNotification = false;
+		}, 2500);
+	}
 
-	const app = initializeApp(firebaseConfig);
-	const analytics = getAnalytics(app);
+	$notificationSystem.notify = notify;
+
+	onMount(initializeFirebase);
 </script>
 
 <style>
@@ -46,29 +47,20 @@
 		color: #ff3e00;
 	}
 
-	#eventtitle {
-		font-family: "Times new Roman", sans-serif;
-	}
-
 	#submissions {
 		display: grid;
 		gap: 1rem;
 		grid-template-columns: repeat(auto-fit, minmax(325px, 1fr));
 	}
-
-	#signinwithgoogle {
-		border: none;
-		border-radius: 15px;
-		padding: 5px 10px;
-		box-shadow: 0px 0px 5px #ccc;
-	}
 </style>
 
 <main id="maincontent">
-	<div>
-		<h1 id="eventtitle"><i>The Great Sphere</i></h1>
-		<button id="signinwithgoogle">Sign in with Google</button>
-	</div>
+	{#if hasNotification}
+		<NotificationBox>
+			{notificationContent}
+		</NotificationBox>		
+	{/if}
+	<Header />
 	<p>
 		Vote for the winner of The Great Sphere icon making competition!
 	</p>
