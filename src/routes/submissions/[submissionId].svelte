@@ -5,6 +5,7 @@
 	import Header from "../../components/Header.svelte";
 	import Submission from "../../components/Submission.svelte";
 	import NotificationBox from "../../components/NotificationBox.svelte";
+	import Footer from "../../components/Footer.svelte";
 	import { notificationSystem } from "../../stores.ts";
 	import { initializeFirebase } from "../../firebase.ts";
 
@@ -48,3 +49,5 @@
 	<br/>
 	<Submission />
 </main>
+
+<Footer />

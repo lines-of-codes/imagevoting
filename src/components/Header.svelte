@@ -27,7 +27,7 @@
 
 <style>
 	#eventtitle {
-		font-family: "Times new Roman", sans-serif;
+		font-family: Poppins, Lato, sans-serif;
 		margin: 0;
 	}
 
@@ -42,7 +42,7 @@
 		display: inline-block;
 	}
 
-	#signinwithgoogle:hover {
+	.button:hover {
 		box-shadow: 0px 0px 10px #ccc;
 	}
 
@@ -60,7 +60,7 @@
 </style>
 
 <header id="pageheader">
-	<h1 id="eventtitle"><i>The Great Sphere</i></h1>
+	<h1 id="eventtitle">The Great Sphere</h1>
 	<div id="headerbuttons">
 		{#if !$isLoggedIn}
 			<button class="button" id="signinwithgoogle" on:click={login} in:fly={{ x: 20, delay: 500 }} out:fly={{ x: 20 }}>

@@ -14,7 +14,7 @@ const firebaseConfig = {
 	measurementId: "G-ZEMQFYM8RV"
 };
 
-export function initializeFirebase() {
+export function initializeFirebase(onFinish) {
 	const app = initializeApp(firebaseConfig);
 	const appCheck = initializeAppCheck(app, {
 		provider: new ReCaptchaV3Provider("6Lc5PUQgAAAAAH_Cr7-sZNcSQ0QAgonopXA3n1pu"),
@@ -24,5 +24,6 @@ export function initializeFirebase() {
 	onAuthStateChanged(getAuth(app), (user) => {
 		if(user) isLoggedIn.set(true);
 		else isLoggedIn.set(false);
-	})
+	});
+	onFinish?.();
 }

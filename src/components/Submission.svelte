@@ -47,9 +47,15 @@
 	import { fly } from "svelte/transition";
 	import { isLoggedIn, notificationSystem } from "../stores.ts";
 
-	export let notifySystem: Function;
+	type Submission = {
+		submissionOwner: string, 
+		title: string, 
+		image: string, 
+		likes: number
+	};
+	export let submissionData: Submission;
 	let heart: HTMLElement;
-	let likes: number = 0;
+	let likes: number = submissionData.likes;
 	let liked: boolean = false;
 
 	function like() {
@@ -68,7 +74,7 @@
 	}
 
 	function share() {
-		navigator.clipboard.writeText(window.location.host + "/submissions/1234");
+		navigator.clipboard.writeText(`${window.location.host}/submissions/${submissionId}`);
 		$notificationSystem.notify("Copied!");
 	}
 </script>
