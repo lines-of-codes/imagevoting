@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { isLoggedIn } from "../stores.ts";
+	import { isLoggedIn } from "../stores.js";
 	import { onMount } from "svelte";
 	import { fly } from "svelte/transition";
 	import { getAuth, 
@@ -29,6 +29,7 @@
 	#eventtitle {
 		font-family: Poppins, Lato, sans-serif;
 		margin: 0;
+		font-size: calc(1.375rem + 1.5vw); /* I stole this from bootstrap h1 font-size */
 	}
 
 	.button {
@@ -56,6 +57,16 @@
 		justify-content: center;
 		align-items: center;
 		padding: 0 15px;
+	}
+
+	@media only screen and (max-width: 463px) {
+		#pageheader {
+			flex-direction: column-reverse;
+		}
+
+		#headerbuttons {
+			all: initial;
+		}
 	}
 </style>
 

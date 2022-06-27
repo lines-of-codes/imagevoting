@@ -1,6 +1,6 @@
 <svelte:head>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true">
 	<link href="https://fonts.googleapis.com/css2?family=Lato&family=Poppins:wght@700&display=swap" rel="stylesheet"> 
 	<title>The Great Sphere - imagevoting</title>
 </svelte:head>
@@ -12,13 +12,13 @@
 	import Footer from "../components/Footer.svelte";
 	import { onMount } from "svelte";
 	import { getDatabase, ref, get } from "firebase/database";
-	import { initializeFirebase } from "../firebase.ts";
-	import { notificationSystem } from "../stores.ts";
+	import { initializeFirebase } from "../firebase.js";
+	import { notificationSystem } from "../stores.js";
 
 	let hasNotification: boolean = false;
 	let notificationContent: string = "";
 
-	function notify(content) {
+	function notify(content: string) {
 		notificationContent = content;
 		hasNotification = true;
 		setTimeout(() => {
@@ -27,13 +27,13 @@
 	}
 
 	$notificationSystem.notify = notify;
-	let submissions: Object[] = [];
+	let submissions: any = [];
 
 	onMount(() => {
 		document.body.style.margin = "0";
 		initializeFirebase(async () => {
 			const db = getDatabase();
-			submissions = await get(ref(db), limit(20))
+			submissions = await get(ref(db));
 		});
 	});
 </script>
@@ -63,6 +63,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		text-align: center;
 	}
 
 	#submitbutton {
@@ -80,9 +81,10 @@
 		box-shadow: 0px 0px 20px #999;
 	}
 
-	h1, h2, h3 {
+	h2 {
 		font-family: Poppins, Lato, sans-serif;
 		font-weight: bold;
+		font-size: calc(1.325rem + 0.9vw); /* bootstrap font scaling again */
 	}
 </style>
 
@@ -106,7 +108,7 @@
 <main class="maincontent">
 	<section id="submissions">
 		{#each submissions as submission}
-			<Submission submissionData={submission} />
+			<Submission submissionData={submission} submissionId="0" />
 		{:else}
 			<p>No submissions yet, Nothing to see here...</p>
 		{/each}

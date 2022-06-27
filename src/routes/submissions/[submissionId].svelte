@@ -6,14 +6,14 @@
 	import Submission from "../../components/Submission.svelte";
 	import NotificationBox from "../../components/NotificationBox.svelte";
 	import Footer from "../../components/Footer.svelte";
-	import { notificationSystem } from "../../stores.ts";
-	import { initializeFirebase } from "../../firebase.ts";
+	import { notificationSystem } from "../../stores.js";
+	import { initializeFirebase } from "../../firebase.js";
 
 	let id = $page.params.submissionId;
 	let hasNotification: boolean = false;
 	let notificationContent: string = "";
 
-	function notify(content) {
+	function notify(content: string) {
 		notificationContent = content;
 		hasNotification = true;
 		setTimeout(() => {
@@ -27,7 +27,7 @@
 
 <svelte:head>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true">
 	<link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
 	<title>Submission {id} - imagevoting</title>
 </svelte:head>
@@ -47,7 +47,7 @@
 	{/if}
 	<Header />
 	<br/>
-	<Submission />
+	<Submission submissionData={null} submissionId={id} />
 </main>
 
 <Footer />

@@ -1,13 +1,13 @@
 <svelte:head>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="true">
 	<link href="https://fonts.googleapis.com/css2?family=Lato&family=Poppins:wght@700&display=swap" rel="stylesheet"> 
 	<title>Submit image - imagevoting</title>
 </svelte:head>
 
 <script lang="ts">
 	import { onMount } from "svelte";
-	import { initializeFirebase } from "../firebase.ts";
+	import { initializeFirebase } from "../firebase.js";
 	import Header from "../components/Header.svelte";
 	import Footer from "../components/Footer.svelte";
 
@@ -20,7 +20,7 @@
 </script>
 
 <style>
-	h1, h2, h3 {
+	h2 {
 		font-family: Poppins, Lato, sans-serif;
 		font-weight: bold;
 	}
@@ -39,6 +39,13 @@
 		padding: 10px 25px;
 		border: 5px solid gray;
 		border-radius: 25px;
+	}
+
+	@media only screen and (max-width: 463px) {
+		#submitwork {
+			margin: 0;
+			margin-top: 25px;
+		}
 	}
 
 	#submitwork>form input[type=text] {
@@ -91,7 +98,7 @@
 			<!-- TODO: Style the file selector -->
 			<label for="submittedIcon">Upload your icon...</label>
 			<input type="file" accept="image/png, image/jpeg, image/svg+xml" id="submittedIcon"
-					bind:files={submittedFiles} multiple="false" />
+					bind:files={submittedFiles} multiple={false} />
 		</form>
 	</section>
 </main>

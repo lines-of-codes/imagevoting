@@ -45,7 +45,7 @@
 <script lang="ts">
 	import "bootstrap-icons/font/bootstrap-icons.css";
 	import { fly } from "svelte/transition";
-	import { isLoggedIn, notificationSystem } from "../stores.ts";
+	import { isLoggedIn, notificationSystem } from "../stores.js";
 
 	type Submission = {
 		submissionOwner: string, 
@@ -54,8 +54,9 @@
 		likes: number
 	};
 	export let submissionData: Submission;
+	export let submissionId: string;
 	let heart: HTMLElement;
-	let likes: number = submissionData.likes;
+	let likes: number = 0;
 	let liked: boolean = false;
 
 	function like() {
@@ -80,7 +81,7 @@
 </script>
 
 <div class="card">
-	<h2 class="title">Card title</h2>
+	<h2 class="title">{submissionData?.title}</h2>
 	<span>Made by someperson</span>
 	<p>image here</p>
 	<div class="buttoncontainer">
